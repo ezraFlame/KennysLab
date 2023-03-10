@@ -9,17 +9,10 @@ public class RoomManager : MonoBehaviour
 
 	public Dictionary<string, Vector3> entrancePoints;
 
-	public string defaultScene;
-
 	private void Start() {
 		instance = this;
 
 		GetEntrancePoints();
-
-		if (SceneManager.sceneCount == 1)
-		{
-			SceneManager.LoadScene(defaultScene, LoadSceneMode.Additive);
-		}
 	}
 
 	public void LoadRoom(string entrancePoint, string sceneName) {
@@ -27,11 +20,7 @@ public class RoomManager : MonoBehaviour
 	}
 
 	private IEnumerator _LoadRoom(string entrancePoint, string sceneName) {
-		SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(SceneManager.sceneCount - 1));
-
-		SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
-
-		yield return null;
+		yield return SceneManager.LoadSceneAsync(sceneName);
 
 		GetEntrancePoints();
 

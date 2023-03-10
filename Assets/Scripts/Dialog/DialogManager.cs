@@ -25,10 +25,6 @@ public class DialogManager : MonoBehaviour
 
     public Dictionary<string, DialogAnimation> dialogAnimations;
 
-	private void Awake() {
-		RegisterDialogAnimations();
-	}
-
 	private void Start()
     {
         sentences = new Queue<string>();
@@ -38,6 +34,8 @@ public class DialogManager : MonoBehaviour
         textBox.SetActive(false);
 
         commands = new List<DialogCommand>();
+
+		RegisterDialogAnimations();
 	}
 
 	public void StartDialog(Dialog dialog) {
